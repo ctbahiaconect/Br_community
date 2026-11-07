@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin | Nova Geração em Cena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/estetic_file.css">
+</head>
+<body data-page="login" class="login-page">
+    <main class="login-wrap">
+        <section class="login-card" aria-labelledby="login-title">
+            <a class="login-brand" href="index.html" aria-label="Nova Geração em Cena - página inicial">
+                <img src="css/img/soon.png" alt="">
+                <span>Nova Geração <strong>em Cena</strong></span>
+            </a>
+            <div class="login-heading">
+                <span class="login-eyebrow"><i class="fas fa-shield-halved" aria-hidden="true"></i> Acesso restrito</span>
+                <h1 id="login-title">Bem-vindo de volta</h1>
+                <p>Entre com suas credenciais para gerenciar ingressos e clientes.</p>
+            </div>
+
+            <form id="admin-login-form" class="login-form">
+                <div class="form-field">
+                    <label for="username">Usuário</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <input id="username" name="username" type="text" placeholder="Digite seu usuário" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="password">Senha</label>
+                    <div class="input-with-icon password-input">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input id="password" name="password" type="password" placeholder="Digite sua senha" autocomplete="current-password" required>
+                        <button type="button" id="toggle-password" class="password-toggle" aria-label="Mostrar senha">
+                            <i class="fas fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="login-message" class="login-message" role="status" aria-live="polite"></div>
+
+                <button type="submit" class="btn-principal login-submit">
+                    <span>Entrar no painel</span><i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+            <p class="login-security"><i class="fas fa-lock" aria-hidden="true"></i> Senhas protegidas com hash PBKDF2-SHA-256</p>
+            <p class="login-session-note">A sessão é encerrada após 30 minutos sem atividade.</p>
+            <a class="login-back-link" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar ao site</a>
+        </section>
+    </main>
+
+    <script src="js_file/jsonbin-api.js"></script>
+    <script src="js_file/script_110.js"></script>
+</body>
+</html>
