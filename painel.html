@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | Nova Geração em Cena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="09028.css">
+</head>
+<body data-page="admin">
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="soon.png" alt="Logo Nova Geração em Cena">
+                <div class="logo-texto">
+                    <h1>N.G.C</h1>
+                </div>
+            </div>
+
+            <div class="social-header">
+                <button type="button" id="logout-btn" class="btn-social"><i class="fas fa-sign-out-alt"></i> Sair</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <div class="admin-topbar">
+            <div>
+                <h1>Painel administrativo</h1>
+                <p>Cadastre e acompanhe os ingressos confirmados.</p>
+            </div>
+        </div>
+
+        <div class="admin-tabs" role="tablist" aria-label="Seções administrativas">
+            <button type="button" class="admin-tab active" id="tab-add" role="tab" aria-controls="panel-add" aria-selected="true">Cadastrar ingresso</button>
+            <button type="button" class="admin-tab" id="tab-search" role="tab" aria-controls="panel-search" aria-selected="false">Pesquisar ingressos</button>
+            <button type="button" class="admin-tab" id="tab-raffle" role="tab" aria-controls="panel-raffle" aria-selected="false">Sorteio</button>
+        </div>
+
+        <section class="admin-panel" id="panel-add" role="tabpanel" aria-labelledby="tab-add">
+            <h2>Adicionar ingresso</h2>
+            <form id="purchase-form">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="customerName">Nome do cliente</label>
+                        <input id="customerName" name="customerName" type="text" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="phone">Telefone</label>
+                        <input id="phone" name="phone" type="tel" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="email">E-mail</label>
+                        <input id="email" name="email" type="email">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="eventName">Evento</label>
+                        <input id="eventName" name="eventName" type="text" value="Deu a Louca em Mainha" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="ticketType">Tipo de ingresso</label>
+                        <select id="ticketType" name="ticketType">
+                            <option value="Inteira">Inteira</option>
+                            <option value="Meia">Meia</option>
+                            <option value="VIP">VIP</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="quantity">Quantidade</label>
+                        <input id="quantity" name="quantity" type="number" min="1" value="1">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="purchaseDate">Data da compra</label>
+                        <input id="purchaseDate" name="purchaseDate" type="date">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="confirmado">Confirmado</option>
+                            <option value="pendente">Pendente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field full">
+                        <label for="ticket-code">Código do ingresso</label>
+                        <input id="ticket-code" name="ticketCode" type="text" readonly>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="admin-action">Salvar ingresso</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="admin-panel" id="panel-search" role="tabpanel" aria-labelledby="tab-search" hidden>
+            <h2>Pesquisar ingressos</h2>
+            <div class="admin-search">
+                <label for="purchase-search">Buscar por código/ID, nome ou telefone</label>
+                <input id="purchase-search" type="search" autocomplete="off" placeholder="Digite o código, nome ou telefone">
+                <p id="search-result-count" aria-live="polite"></p>
+            </div>
+            <div id="purchase-empty" class="empty-state">Nenhum ingresso foi cadastrado ainda.</div>
+            <div id="purchase-no-results" class="empty-state">Nenhum ingresso corresponde à pesquisa.</div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Telefone</th>
+                            <th>Evento</th>
+                            <th>Tipo</th>
+                            <th>Código</th>
+                            <th>Certificado</th>
+                            <th>Comprovante</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="purchase-table"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="admin-panel" id="panel-raffle" role="tabpanel" aria-labelledby="tab-raffle" hidden>
+            <h2>Sorteio de clientes</h2>
+            <p>Cada ingresso confirmado vale uma chance. Selecione um evento ou participe com todos.</p>
+            <div class="raffle-controls">
+                <div class="form-field">
+                    <label for="raffle-event">Evento</label>
+                    <select id="raffle-event">
+                        <option value="">Todos os eventos</option>
+                    </select>
+                </div>
+                <button type="button" class="admin-action" id="draw-winner-btn">
+                    <i class="fas fa-dice" aria-hidden="true"></i> Sortear cliente
+                </button>
+            </div>
+            <div class="raffle-result" id="raffle-result" aria-live="polite">
+                Selecione um evento e inicie o sorteio.
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/js63828.js"></script>
+</body>
+</html>
